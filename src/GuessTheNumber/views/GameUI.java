@@ -78,4 +78,7 @@ public class GameUI {
     public void invalidInput(){
         consoleManager.printOutPut("Please input a valid integer");
     }
+    public void goodbyeMessage(){
+        consoleManager.printOutPut("Thank you for playing!Game is terminating...goodbye");
+    }
 }

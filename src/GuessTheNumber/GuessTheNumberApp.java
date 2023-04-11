@@ -67,7 +67,7 @@ public class GuessTheNumberApp implements IApp {
             showPlayerStats();
         }
 
-        while(isRunning){
+        while(isRunning && player.getCurrentGameTries() != max){
             input = gameUI.getInputMessage();
             switch (checkIntEquality(input, randNum)){
                 case 0:
@@ -81,6 +81,9 @@ public class GuessTheNumberApp implements IApp {
                     break;
             }
         }
+
+        gameUI.goodbyeMessage();
+
         return 0;
     }
 }
