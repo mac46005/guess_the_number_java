@@ -1,8 +1,8 @@
-package models;
+package GuessTheNumber.models;
 
 public class Player {
-    private int totalGames;
-    private int totalWins;
+    private int totalGames = 0;
+    private int totalWins = 0;
 
     public Player(){
 

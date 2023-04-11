@@ -1,3 +1,5 @@
+package GuessTheNumber;
+
 import java.util.Scanner;
 
 public class ConsoleManager {

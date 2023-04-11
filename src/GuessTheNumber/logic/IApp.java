@@ -1,4 +1,4 @@
-package logic;
+package GuessTheNumber.logic;
 
 public interface IApp {
     int run();
