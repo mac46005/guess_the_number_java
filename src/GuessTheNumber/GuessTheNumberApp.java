@@ -37,17 +37,27 @@ public class GuessTheNumberApp implements IApp {
     }
 
     private boolean processPlayerWon(){
-        boolean continueGame = false;
-        return continueGame;
+        player.incrementTotalWins();
+        player.incrementTotalGames();
+        player.setLargestIntGuessed(randNum);
+        gameUI.displayPlayerWon(player, randNum);
+        gameUI.displayPlayerStats(player);
+        player.setCurrentGameTries(0);
+        randNum = randNumGen.generateRandomInteger(min,max);
+        return gameUI.promptRematch();
     }
-    private void processPlayerOverTarget(){
-
+    private boolean processPlayerOverTarget(){
+        player.incrementCurrentGameTries();
+        gameUI.playerHigh();
+        return gameUI.promptRematch();
     }
-    private void processPlayerUnderTarger(){
-
+    private boolean processPlayerUnderTarget(){
+        player.incrementCurrentGameTries();
+        gameUI.playerLow();
+        return gameUI.promptRematch();
     }
     private void showPlayerStats(){
-
+        gameUI.displayPlayerStats(player);
     }
     public int run(){
         boolean isRunning = true;
@@ -64,10 +74,10 @@ public class GuessTheNumberApp implements IApp {
                     isRunning = processPlayerWon();
                     break;
                 case 1:
-                    processPlayerOverTarget();
+                    isRunning = processPlayerOverTarget();
                     break;
                 case -1:
-                    processPlayerUnderTarger();
+                    isRunning =processPlayerUnderTarget();
                     break;
             }
         }

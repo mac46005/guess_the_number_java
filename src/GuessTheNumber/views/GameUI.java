@@ -18,7 +18,7 @@ public class GameUI {
     }
     public int getInputMessage(){
         boolean inputIncorrect = true;
-        Pattern pattern = Pattern.compile("^[0-9]+&");
+        Pattern pattern = Pattern.compile("^[0-9]+$");
         while(inputIncorrect){
             input = consoleManager.getInput("Please input an integer:");
             Matcher matcher = pattern.matcher(input);
@@ -28,7 +28,12 @@ public class GameUI {
         }
         return Integer.parseInt(input);
     }
-
+    public void playerLow(){
+        consoleManager.printOutPut("You are lower than the target");
+    }
+    public void playerHigh(){
+        consoleManager.printOutPut("You are higher than the target");
+    }
     public void displayPlayerStats(Player player){
         StringBuilder sb = new StringBuilder();
         sb.append("PLAYER STATS\n");
@@ -47,18 +52,29 @@ public class GameUI {
         String input = "";
         boolean wantsRematch = false;
         boolean isInvalidInput = true;
-        while(isInvalidInput){
+        while(true){
             input = consoleManager.getInput("Do you want to play again?\nINTPUT: y(yes) or n(n)?");
-            if(input == "n"){
-                wantsRematch =  false;
-            }else{
+            if(input.equals("y")){
                 wantsRematch = true;
+                break;
+            }else if(input.equals("n")){
+                break;
             }
-            invalidInput();
+            consoleManager.getInput("Please input either y or n!");
         }
         return wantsRematch;
     }
+    public void displayPlayerWon(Player player, int target){
+        StringBuilder sb = new StringBuilder();
+        sb.append("You guessed the correct number!\n");
+        sb.append("Target is " + target + "\n");
+        sb.append("It took you " + player.getCurrentGameTries() + " to guess the correct number.\n");
 
+        consoleManager.printOutPut(sb.toString());
+    }
+    public void promptPlayerContinue(){
+        consoleManager.getInput("press any key to continue...");
+    }
     public void invalidInput(){
         consoleManager.printOutPut("Please input a valid integer");
     }
